@@ -38,7 +38,7 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(
               width: double.infinity,
               child: Card(
-                color: Colors.green,
+                color: Colors.black54,
                 child: Text(
                   'Lista de gastos',
                   style: TextStyle(fontSize: 24, color: Colors.white),
@@ -51,20 +51,40 @@ class MyHomePage extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        color: Colors.green,
-                        width: 50,
-                        height: 70,
-                        child: Center(
-                            child: Text(
-                          tx.amount.toString(),
-                          style: const TextStyle(color: Colors.white),
-                        )),
+                        color: Colors.black54,
+                        width: 90,
+                        height: 85,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                tx.amount.toString(),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 4),
+                                child: Text(
+                                  'R\$',
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
+                                ),
+                              ),
+                            ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(tx.title),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Text(tx.title,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
+                            ),
                             Text(tx.date.toString()),
                           ],
                         ),
