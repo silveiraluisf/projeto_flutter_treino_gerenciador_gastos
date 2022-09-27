@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  final List<Transaction> transaction = [];
+  final List<Transaction> transactions = [
+    Transaction(id: '1', title: 'Sapato', amount: 189.99, date: DateTime.now()),
+    Transaction(
+        id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +34,45 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          children: const <Widget>[
-            SizedBox(
+          children: <Widget>[
+            const SizedBox(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
-                child: Text('Criação de card'),
+                color: Colors.green,
+                child: Text(
+                  'Lista de gastos',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
               ),
             ),
-            Card(
-              color: Colors.lightBlueAccent,
-              child: Text('Segundo texto'),
+            Column(
+              children: transactions.map((tx) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        color: Colors.green,
+                        width: 50,
+                        height: 70,
+                        child: Center(
+                            child: Text(
+                          tx.amount.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Text(tx.title),
+                            Text(tx.date.toString()),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
             )
           ],
         ),
