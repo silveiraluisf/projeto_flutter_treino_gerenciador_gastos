@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_flutter_treino_5/components/transaction_form.dart';
+import '../components/transaction_form.dart';
+import '../components/transactions_chart.dart';
 import '../components/transactions_list.dart';
 
 class Home extends StatelessWidget {
@@ -17,25 +18,7 @@ class Home extends StatelessWidget {
           decoration: const BoxDecoration(color: Colors.black12),
           child: Column(
             children: const <Widget>[
-              SizedBox(
-                width: double.infinity,
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  color: Colors.deepPurple,
-                  child: SizedBox(
-                    width: 300,
-                    height: 100,
-                    child: Center(
-                      child: Text(
-                        'Lista de gastos',
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              TransactionsChart(),
               TransactionForm(),
               TransactionsList(),
             ],
