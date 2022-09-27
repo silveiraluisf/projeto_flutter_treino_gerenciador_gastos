@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projeto_flutter_treino_5/transaction.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
         title: const Text('Gerenciador de gastos'),
       ),
       body: Center(
@@ -38,38 +40,74 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(
               width: double.infinity,
               child: Card(
-                color: Colors.black54,
-                child: Text(
-                  'Lista de gastos',
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                color: Colors.deepPurple,
+                child: SizedBox(
+                  width: 300,
+                  height: 100,
+                  child: Center(
+                    child: Text(
+                      'Lista de gastos',
+                      style: TextStyle(fontSize: 24, color: Colors.white),
+                    ),
+                  ),
                 ),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    child: TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    child: TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Add Transaction',
+                          style: TextStyle(color: Colors.deepPurple, fontSize: 16),
+                        )),
+                  ),
+                ],
               ),
             ),
             Column(
               children: transactions.map((tx) {
                 return Card(
+                  elevation: 5,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8))),
                   child: Row(
                     children: [
                       Container(
-                        color: Colors.black54,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.deepPurple[400],
+                        ),
                         width: 90,
                         height: 85,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                tx.amount.toString(),
+                                'R\$${tx.amount}',
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Text(
-                                  'R\$',
-                                  style: TextStyle(color: Colors.white, fontSize: 18),
-                                ),
                               ),
                             ]),
                       ),
@@ -85,7 +123,10 @@ class MyHomePage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
                             ),
-                            Text(tx.date.toString()),
+                            Text(
+                              DateFormat().add_yMMMd().format(tx.date),
+                              style: const TextStyle(color: Colors.grey),
+                            ),
                           ],
                         ),
                       )
