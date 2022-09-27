@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_flutter_treino_5/components/transactions_list.dart';
 
 class TransactionForm extends StatelessWidget {
-  const TransactionForm({Key? key}) : super(key: key);
+  TransactionForm({Key? key}) : super(key: key);
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

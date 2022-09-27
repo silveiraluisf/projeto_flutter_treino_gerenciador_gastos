@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/transaction_form.dart';
+import 'package:projeto_flutter_treino_5/components/user_transactions.dart';
 import '../components/transactions_chart.dart';
-import '../components/transactions_list.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,15 +13,11 @@ class Home extends StatelessWidget {
         title: const Text('Gerenciador de gastos'),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(color: Colors.black12),
-          child: Column(
-            children: const <Widget>[
-              TransactionsChart(),
-              TransactionForm(),
-              TransactionsList(),
-            ],
-          ),
+        child: Column(
+          children: const <Widget>[
+            TransactionsChart(),
+            UserTransactions(),
+          ],
         ),
       ),
     );

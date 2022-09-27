@@ -9,9 +9,6 @@ final List<Transaction> transactions = [
       id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
 ];
 
-final titleController = TextEditingController();
-final amountController = TextEditingController();
-
 class TransactionsList extends StatelessWidget {
   const TransactionsList({Key? key}) : super(key: key);
 
@@ -32,17 +29,16 @@ class TransactionsList extends StatelessWidget {
                 ),
                 width: 90,
                 height: 85,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'R\$${tx.amount}',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ]),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    'R\$${tx.amount}',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                ]),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -53,8 +49,7 @@ class TransactionsList extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(tx.title,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     Text(
                       DateFormat().add_yMMMd().format(tx.date),
