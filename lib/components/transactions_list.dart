@@ -3,14 +3,10 @@ import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
-final List<Transaction> transactions = [
-  Transaction(id: '1', title: 'Sapato', amount: 189.99, date: DateTime.now()),
-  Transaction(
-      id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
-];
-
 class TransactionsList extends StatelessWidget {
-  const TransactionsList({Key? key}) : super(key: key);
+  final List<Transaction> transactions;
+
+  TransactionsList(this.transactions);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,7 @@ class TransactionsList extends StatelessWidget {
                   color: Colors.deepPurple[400],
                 ),
                 width: 90,
-                height: 85,
+                height: 70,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
