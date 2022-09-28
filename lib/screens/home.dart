@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: const Text('Gerenciador de gastos'),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -19,6 +20,12 @@ class Home extends StatelessWidget {
             UserTransactions(),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.deepPurple,
+        child: const Icon(Icons.add),
       ),
     );
   }
