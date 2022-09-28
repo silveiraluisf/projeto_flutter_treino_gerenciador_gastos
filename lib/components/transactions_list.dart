@@ -21,7 +21,7 @@ class TransactionsList extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 4),
+                margin: const EdgeInsets.only(left: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.deepPurple[400],
@@ -31,7 +31,7 @@ class TransactionsList extends StatelessWidget {
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
-                    'R\$${tx.amount}',
+                    'R\$${tx.amount.toStringAsFixed(2)}',
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
