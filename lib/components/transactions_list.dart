@@ -25,7 +25,7 @@ class TransactionsList extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.deepPurple[400],
+                      color: Theme.of(context).primaryColor,
                     ),
                     width: 90,
                     height: 50,

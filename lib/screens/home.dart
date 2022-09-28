@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        // backgroundColor: Colors.deepPurple,
         title: const Text('Gerenciador de gastos'),
         actions: [
           IconButton(
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddNewTransaction(context),
-        backgroundColor: Colors.deepPurple,
+        // backgroundColor: Colors.deepPurple,
         child: const Icon(Icons.add),
       ),
     );
