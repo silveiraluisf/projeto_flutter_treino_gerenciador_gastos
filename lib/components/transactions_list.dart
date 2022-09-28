@@ -10,11 +10,25 @@ class TransactionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 300,
-        child: ListView.builder(
+    return SizedBox(
+        height: 400,
+        child: transactions.isEmpty ? Column(
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text('Nenhum gasto efetuado ainda!', style: TextStyle(fontSize: 18),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SizedBox(
+                height: 250,
+                child:
+                  Image.asset('assets/images/waiting.png'),
+              ),
+            )
+          ],
+        ) : ListView.builder(
           itemBuilder: (context, index) {
-            // children: transactions.map((tx) {
             return Card(
               elevation: 3,
               shape: const RoundedRectangleBorder(

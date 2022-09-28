@@ -13,9 +13,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<Transaction> _userTransactions = [
-    Transaction(id: '1', title: 'Sapato', amount: 189.99, date: DateTime.now()),
-    Transaction(
-        id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
+    // Transaction(id: '1', title: 'Sapato', amount: 189.99, date: DateTime.now()),
+    // Transaction(
+    //     id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -48,7 +48,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.deepPurple,
         title: const Text('Gerenciador de gastos'),
         actions: [
           IconButton(
@@ -67,7 +66,6 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddNewTransaction(context),
-        // backgroundColor: Colors.deepPurple,
         child: const Icon(Icons.add),
       ),
     );

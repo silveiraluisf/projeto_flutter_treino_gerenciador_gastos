@@ -14,7 +14,15 @@ class MyApp extends StatelessWidget {
       title: 'Gerenciador de gastos',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-      ),
+        fontFamily: 'Quicksand',
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       home: const MyHomePage(),
     );
   }
