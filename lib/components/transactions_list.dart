@@ -21,12 +21,13 @@ class TransactionsList extends StatelessWidget {
           child: Row(
             children: [
               Container(
+                margin: const EdgeInsets.only(left: 4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.deepPurple[400],
                 ),
                 width: 90,
-                height: 70,
+                height: 50,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
