@@ -18,6 +18,17 @@ class _HomeState extends State<Home> {
     //     id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+    }
+
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -58,7 +69,7 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            TransactionsChart(),
+            TransactionsChart(_recentTransactions),
             TransactionsList(_userTransactions),
           ],
         ),
