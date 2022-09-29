@@ -26,8 +26,8 @@ class _HomeState extends State<Home> {
 
   bool _showChart = false;
 
-  void _addNewTransaction(String txTitle, double txAmount,
-      DateTime chosenDate) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
@@ -62,10 +62,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final isLandScape =
-        MediaQuery
-            .of(context)
-            .orientation == Orientation.landscape;
+    final isLandScape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: const Text('Gerenciador de gastos'),
       actions: [
@@ -74,17 +71,10 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.add))
       ],
     );
-    final txListWidget = Container(
-      height: (MediaQuery
-          .of(context)
-          .size
-          .height -
+    final txListWidget = SizedBox(
+      height: mediaQuery.size.height -
           appBar.preferredSize.height -
-          MediaQuery
-              .of(context)
-              .padding
-              .top) *
-          0.7,
+          mediaQuery.padding.top * 0.7,
       child: TransactionsList(_userTransactions, _deleteTransaction),
     );
 
@@ -110,21 +100,21 @@ class _HomeState extends State<Home> {
               ),
             if (!isLandScape)
               SizedBox(
-                height: mediaQuery
-                    .size
-                    .height * 0.3 -
-                    appBar.preferredSize.height,
+                height:
+                    mediaQuery.size.height * 0.3 - appBar.preferredSize.height,
                 child: TransactionsChart(_recentTransactions),
               ),
             if (!isLandScape) txListWidget,
-            if (isLandScape) _showChart
-                ? SizedBox(
-                  height: (mediaQuery.size.height -
-                    appBar.preferredSize.height - mediaQuery.padding.top) *
-                0.7,
-                child: TransactionsChart(_recentTransactions),
-            )
-                : txListWidget
+            if (isLandScape)
+              _showChart
+                  ? SizedBox(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              mediaQuery.padding.top) *
+                          0.7,
+                      child: TransactionsChart(_recentTransactions),
+                    )
+                  : txListWidget
           ],
         ),
       ),
