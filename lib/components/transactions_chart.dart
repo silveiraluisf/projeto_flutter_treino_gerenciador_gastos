@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../components/chart_bar.dart';
 import '../models/transaction.dart';
 
 class TransactionsChart extends StatelessWidget {
@@ -22,9 +23,15 @@ class TransactionsChart extends StatelessWidget {
         }
       }
       return {
-        'day': DateFormat.E().format(weekDay).substring(0, 1),
+        'day': DateFormat.E().format(weekDay).substring(0, 1) as String,
         'amount': totalSum,
       };
+    });
+  }
+
+  double get totalSpending {
+    return groupedTransactionValues.fold(0.0, (sum, item) {
+      return sum + (item['amount'] as double);
     });
   }
 
@@ -36,21 +43,24 @@ class TransactionsChart extends StatelessWidget {
         elevation: 5,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8))),
-        color: Theme
-            .of(context)
-            .primaryColorLight,
-        child: SizedBox(
+        color: Theme.of(context).primaryColorLight,
+        child: Container(
+          padding: const EdgeInsets.all(10),
           width: 300,
-          height: 100,
-          child: Center(
-            child: Row(
-              children: groupedTransactionValues.map((data) {
-                return Text(
-                  '${data['day']}: ${data['amount']}',
-                  // style: TextStyle(fontSize: 24, color: Colors.deepPurple),
-                );
-              }).toList(),
-            ),
+          height: 120,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: groupedTransactionValues.map((data) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                    (data['day'] as String),
+                    (data['amount'] as double),
+                    totalSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / totalSpending),
+              );
+            }).toList(),
           ),
         ),
       ),
