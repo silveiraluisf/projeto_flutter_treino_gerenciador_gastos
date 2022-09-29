@@ -47,12 +47,12 @@ class TransactionsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'R\$${transactions[index].amount.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
+                              'R\$${transactions[index].amount.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
                         ]),
                   ),
                   Padding(

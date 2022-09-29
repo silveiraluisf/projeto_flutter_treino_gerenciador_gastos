@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final Function addTx;
@@ -10,15 +11,15 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final titleController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime? _selectedDate;
 
-  final amountController = TextEditingController();
+  void _submitData() {
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
-  void submitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
-
-    if (enteredTitle.isEmpty || enteredAmount <= 0 ) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
 
@@ -30,6 +31,22 @@ class _TransactionFormState extends State<TransactionForm> {
     Navigator.pop(context);
   }
 
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -39,29 +56,47 @@ class _TransactionFormState extends State<TransactionForm> {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: TextField(
-              controller: titleController,
+              controller: _titleController,
               decoration: const InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => _submitData(),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: TextField(
-              controller: amountController,
+              controller: _amountController,
               decoration: const InputDecoration(labelText: 'Amount'),
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => submitData(),
+              onSubmitted: (_) => _submitData(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  (_selectedDate) == null
+                      ? 'Data não escolhida!'
+                      : DateFormat.yMd().format(_selectedDate!),
+                ),
+                TextButton(
+                    onPressed: _presentDatePicker,
+                    child: const Text(
+                      'Escolher Data',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+              ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-                onPressed:
-                  submitData,
+            child: ElevatedButton(
+                onPressed: _submitData,
                 child: const Text(
                   'Add Transaction',
-                  style: TextStyle(color: Colors.deepPurple, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 )),
           ),
         ],
