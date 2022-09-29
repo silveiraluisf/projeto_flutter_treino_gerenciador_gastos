@@ -28,7 +28,6 @@ class _HomeState extends State<Home> {
     }).toList();
     }
 
-
   void _addNewTransaction(String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -55,6 +54,12 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +75,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: <Widget>[
             TransactionsChart(_recentTransactions),
-            TransactionsList(_userTransactions),
+            TransactionsList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),
