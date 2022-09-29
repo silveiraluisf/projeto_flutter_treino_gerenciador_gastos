@@ -46,24 +46,18 @@ class TransactionsChart extends StatelessWidget {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8))),
           color: Theme.of(context).primaryColorLight,
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            width: 300,
-            height: 125,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: groupedTransactionValues.map((data) {
-                return Flexible(
-                  fit: FlexFit.tight,
-                  child: ChartBar(
-                      (data['day'] as String),
-                      (data['amount'] as double),
-                      totalSpending == 0.0
-                          ? 0.0
-                          : (data['amount'] as double) / totalSpending),
-                );
-              }).toList(),
-            ),
+          child: Row(
+            children: groupedTransactionValues.map((data) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                    (data['day'] as String),
+                    (data['amount'] as double),
+                    totalSpending == 0.0
+                        ? 0.0
+                        : (data['amount'] as double) / totalSpending),
+              );
+            }).toList(),
           ),
         ),
       ),

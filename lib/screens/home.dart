@@ -12,11 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<Transaction> _userTransactions = [
-    // Transaction(id: '1', title: 'Sapato', amount: 189.99, date: DateTime.now()),
-    // Transaction(
-    //     id: '2', title: 'Conta de luz', amount: 77.89, date: DateTime.now()),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -26,9 +22,12 @@ class _HomeState extends State<Home> {
         ),
       );
     }).toList();
-    }
+  }
 
-  void _addNewTransaction(String txTitle, double txAmount, DateTime chosenDate) {
+  bool _showChart = false;
+
+  void _addNewTransaction(String txTitle, double txAmount,
+      DateTime chosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
@@ -47,8 +46,8 @@ class _HomeState extends State<Home> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: TransactionForm(_addNewTransaction),
           behavior: HitTestBehavior.opaque,
+          child: TransactionForm(_addNewTransaction),
         );
       },
     );
@@ -62,20 +61,70 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandScape =
+        MediaQuery
+            .of(context)
+            .orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: const Text('Gerenciador de gastos'),
+      actions: [
+        IconButton(
+            onPressed: () => _startAddNewTransaction(context),
+            icon: const Icon(Icons.add))
+      ],
+    );
+    final txListWidget = Container(
+      height: (MediaQuery
+          .of(context)
+          .size
+          .height -
+          appBar.preferredSize.height -
+          MediaQuery
+              .of(context)
+              .padding
+              .top) *
+          0.7,
+      child: TransactionsList(_userTransactions, _deleteTransaction),
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gerenciador de gastos'),
-        actions: [
-          IconButton(
-              onPressed: () => _startAddNewTransaction(context),
-              icon: const Icon(Icons.add))
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TransactionsChart(_recentTransactions),
-            TransactionsList(_userTransactions, _deleteTransaction),
+            if (isLandScape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('Mostrar gráfico'),
+                  Switch(
+                      value: _showChart,
+                      onChanged: (val) {
+                        setState(() {
+                          _showChart = val;
+                        });
+                      })
+                ],
+              ),
+            if (!isLandScape)
+              SizedBox(
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.3 -
+                    appBar.preferredSize.height,
+                child: TransactionsChart(_recentTransactions),
+              ),
+            if (!isLandScape) txListWidget,
+            if (isLandScape) _showChart
+                ? SizedBox(
+                  height: (MediaQuery.of(context).size.height -
+                    appBar.preferredSize.height - MediaQuery.of(context).padding.top) *
+                0.7,
+                child: TransactionsChart(_recentTransactions),
+            )
+                : txListWidget
           ],
         ),
       ),

@@ -14,24 +14,28 @@ class TransactionsList extends StatelessWidget {
     return SizedBox(
       height: 400,
       child: transactions.isEmpty
-          ? Column(
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text(
-                    'Nenhum gasto efetuado ainda!',
-                    style: TextStyle(fontSize: 18),
+          ? LayoutBuilder(builder: (ctx, constraints) {
+              return Column(
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Text(
+                      'Nenhum gasto efetuado ainda!',
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    height: 250,
-                    child: Image.asset('assets/images/waiting.png'),
-                  ),
-                )
-              ],
-            )
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: constraints.maxHeight * 0.5,
+                      child: Image.asset('assets/images/waiting.png',
+                      fit: BoxFit.cover,),
+                    ),
+                  )
+                ],
+              );
+            },
+      )
           : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
@@ -50,14 +54,16 @@ class TransactionsList extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           child: FittedBox(
                             child: Text(
-                              'R\$${transactions[index].amount}',
-                              style: const TextStyle(
-                                  color: Colors.white),
+                              'R\$${transactions[index].amount.toStringAsFixed(2)}',
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
                       ),
-                      title: Text(transactions[index].title, style: Theme.of(context).textTheme.headline6,),
+                      title: Text(
+                        transactions[index].title,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                       subtitle: Text(
                         DateFormat.yMMMd().format(transactions[index].date),
                       ),
