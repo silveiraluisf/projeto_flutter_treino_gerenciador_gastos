@@ -61,6 +61,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final isLandScape =
         MediaQuery
             .of(context)
@@ -109,8 +110,7 @@ class _HomeState extends State<Home> {
               ),
             if (!isLandScape)
               SizedBox(
-                height: MediaQuery
-                    .of(context)
+                height: mediaQuery
                     .size
                     .height * 0.3 -
                     appBar.preferredSize.height,
@@ -119,8 +119,8 @@ class _HomeState extends State<Home> {
             if (!isLandScape) txListWidget,
             if (isLandScape) _showChart
                 ? SizedBox(
-                  height: (MediaQuery.of(context).size.height -
-                    appBar.preferredSize.height - MediaQuery.of(context).padding.top) *
+                  height: (mediaQuery.size.height -
+                    appBar.preferredSize.height - mediaQuery.padding.top) *
                 0.7,
                 child: TransactionsChart(_recentTransactions),
             )
