@@ -16,16 +16,20 @@ class _TransactionFormState extends State<TransactionForm> {
   DateTime? _selectedDate;
 
   void _submitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
 
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     );
 
     Navigator.pop(context);
@@ -71,24 +75,21 @@ class _TransactionFormState extends State<TransactionForm> {
               onSubmitted: (_) => _submitData(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  (_selectedDate) == null
-                      ? 'Data não escolhida!'
-                      : DateFormat.yMd().format(_selectedDate!),
-                ),
-                TextButton(
-                    onPressed: _presentDatePicker,
-                    child: const Text(
-                      'Escolher Data',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                (_selectedDate) == null
+                    ? 'Data não escolhida!'
+                    : 'Data escolhida: ${DateFormat.yMd().format(_selectedDate!)}',
+              ),
+              TextButton(
+                  onPressed: _presentDatePicker,
+                  child: const Text(
+                    'Escolher Data',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),

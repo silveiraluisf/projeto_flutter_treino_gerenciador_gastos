@@ -34,6 +34,7 @@ class TransactionsList extends StatelessWidget {
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 5),
@@ -58,7 +59,7 @@ class TransactionsList extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),
@@ -72,7 +73,8 @@ class TransactionsList extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.delete))
                 ],
               ),
             );
