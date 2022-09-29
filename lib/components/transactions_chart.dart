@@ -6,7 +6,7 @@ import '../models/transaction.dart';
 class TransactionsChart extends StatelessWidget {
   final List<Transaction> recentTransactions;
 
-  TransactionsChart(this.recentTransactions);
+  const TransactionsChart(this.recentTransactions, {super.key});
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -23,7 +23,7 @@ class TransactionsChart extends StatelessWidget {
         }
       }
       return {
-        'day': DateFormat.E().format(weekDay).substring(0, 1) as String,
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum,
       };
     });

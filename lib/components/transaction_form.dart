@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 class TransactionForm extends StatefulWidget {
   final Function addTx;
 
-  TransactionForm(this.addTx);
+  const TransactionForm(this.addTx, {super.key});
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();

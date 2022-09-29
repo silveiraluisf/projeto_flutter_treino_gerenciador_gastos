@@ -7,7 +7,7 @@ class TransactionsList extends StatelessWidget {
   final List<Transaction> transactions;
   final Function deleteTx;
 
-  TransactionsList(this.transactions, this.deleteTx);
+  const TransactionsList(this.transactions, this.deleteTx, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class TransactionsList extends StatelessWidget {
                       ),
                       trailing: IconButton(
                           onPressed: () => deleteTx(transactions[index].id),
-                          icon: Icon(Icons.delete)),
+                          icon: const Icon(Icons.delete)),
                     ));
               },
               itemCount: transactions.length,
