@@ -35,59 +35,36 @@ class TransactionsList extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
-                  elevation: 3,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 5),
+                    elevation: 3,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    child: ListTile(
+                      leading: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Theme.of(context).primaryColor,
                         ),
                         width: 90,
-                        height: 50,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'R\$${transactions[index].amount.toStringAsFixed(2)}',
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Text(transactions[index].title,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: FittedBox(
+                            child: Text(
+                              'R\$${transactions[index].amount}',
+                              style: const TextStyle(
+                                  color: Colors.white),
                             ),
-                            Text(
-                              DateFormat()
-                                  .add_yMMMd()
-                                  .format(transactions[index].date),
-                              style: const TextStyle(color: Colors.grey),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                      IconButton(
+                      title: Text(transactions[index].title),
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date),
+                      ),
+                      trailing: IconButton(
                           onPressed: () => deleteTx(transactions[index].id),
-                          icon: const Icon(Icons.delete))
-                    ],
-                  ),
-                );
+                          icon: Icon(Icons.delete)),
+                    ));
               },
               itemCount: transactions.length,
             ),
