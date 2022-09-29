@@ -53,54 +53,65 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => _submitData(),
-            ),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 3,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: TextField(
-              controller: _amountController,
-              decoration: const InputDecoration(labelText: 'Amount'),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitData(),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
             children: [
-              Text(
-                (_selectedDate) == null
-                    ? 'Data não escolhida!'
-                    : 'Data escolhida: ${DateFormat.yMd().format(_selectedDate!)}',
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                ),
+                child: TextField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                  onSubmitted: (_) => _submitData(),
+                ),
               ),
-              TextButton(
-                  onPressed: _presentDatePicker,
-                  child: const Text(
-                    'Escolher Data',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: TextField(
+                  controller: _amountController,
+                  decoration: const InputDecoration(labelText: 'Amount'),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  onSubmitted: (_) => _submitData(),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    (_selectedDate) == null
+                        ? 'Data não escolhida!'
+                        : 'Data escolhida: ${DateFormat.yMd().format(_selectedDate!)}',
+                  ),
+                  TextButton(
+                      onPressed: _presentDatePicker,
+                      child: const Text(
+                        'Escolher Data',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton(
+                    onPressed: _submitData,
+                    child: const Text(
+                      'Add Transaction',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    )),
+              ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-                onPressed: _submitData,
-                child: const Text(
-                  'Add Transaction',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                )),
-          ),
-        ],
+        ),
       ),
     );
   }

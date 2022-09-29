@@ -67,7 +67,12 @@ class TransactionsList extends StatelessWidget {
                       subtitle: Text(
                         DateFormat.yMMMd().format(transactions[index].date),
                       ),
-                      trailing: IconButton(
+                      trailing: MediaQuery.of(context).size.width > 460
+                        ? TextButton.icon(onPressed: () => deleteTx(transactions[index].id), 
+                          icon: const Icon(Icons.delete),
+                          label: const Text('Apagar'),
+                      )
+                          : IconButton(
                           onPressed: () => deleteTx(transactions[index].id),
                           icon: const Icon(Icons.delete)),
                     ));
